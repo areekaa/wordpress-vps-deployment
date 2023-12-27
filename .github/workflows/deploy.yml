@@ -27,9 +27,12 @@ jobs:
 
       - name: Set Up MySQL Database
         run: |
-          mysql -u wordpress -p$wordpress123 -e "CREATE DATABASE IF NOT EXISTS wordpress;"
-          mysql -u wordpress -p$wordpress123 -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$wordpress'@'localhost' IDENTIFIED BY '$wordpress123';"
-          mysql -u wordpress -p$wordpress123 -e "FLUSH PRIVILEGES;"
+      sudo apt-get update
+    sudo apt-get install -y mysql-server
+    sudo systemctl start mysql
+    sudo mysql_secure_installation
+    sudo systemctl restart mysql
+    sudo systemctl status mysql
 
       - name: Install Let's Encrypt Certificate
         run: |
