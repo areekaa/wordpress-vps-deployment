@@ -1,6 +1,16 @@
 WordPress VPS Deployment with Nginx Caching
 This repository contains the setup instructions and necessary files for deploying a WordPress website on a Virtual Private Server (VPS) using AWS EC2. The deployment process involves configuring Nginx as the web server, MySQL/MariaDB as the database, PHP for processing dynamic content, and enhancing website performance with Nginx caching. Additionally, the website is secured with Let's Encrypt SSL/TLS certificates.
 
+**
+Domain is linuxisfun.ddns.net
+
+Admin: http://linuxisfun.ddns.net/input
+
+Username: areeka-nankani-CE
+Password: YioVSKvNlIQaobhrp2
+
+**
+
 Table of Contents:-
 Server Provisioning
 Website Configuration
