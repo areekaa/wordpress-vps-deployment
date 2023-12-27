@@ -1,7 +1,7 @@
 WordPress VPS Deployment
 This repository contains the setup instructions and necessary files for deploying a WordPress website on a Virtual Private Server (VPS) using AWS EC2. The deployment process involves configuring Nginx as the web server, MySQL/MariaDB as the database, PHP for processing dynamic content, and securing the website with Let's Encrypt SSL/TLS certificates.
 
-Table of Contents
+Table of Contents:-
 Server Provisioning
 Website Configuration
 SSL/TLS Certificate
