@@ -1,1 +1,36 @@
+name: Deploy to VPS
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nginx mysql-server php-fpm php-mysql php-curl php-mbstring php-imagick php-xml php-zip
+
+      - name: Build and Transfer Files to VPS
+        run: |
+          sudo cp -r . /var/www/html
+          sudo chown -R www-data:www-data /var/www/html
+          sudo systemctl restart nginx
+          sudo systemctl restart php7.4-fpm
+
+      - name: Set Up MySQL Database
+        run: |
+          mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS wordpress;"
+          mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$wordpress'@'localhost' IDENTIFIED BY '$wordpress123';"
+          mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+
+      - name: Install Let's Encrypt Certificate
+        run: |
+          sudo certbot --nginx -d linuxisfun.ddns.net -m areeka.nankani@gmail.com --agree-tos
