@@ -1,5 +1,5 @@
-WordPress VPS Deployment
-This repository contains the setup instructions and necessary files for deploying a WordPress website on a Virtual Private Server (VPS) using AWS EC2. The deployment process involves configuring Nginx as the web server, MySQL/MariaDB as the database, PHP for processing dynamic content, and securing the website with Let's Encrypt SSL/TLS certificates.
+WordPress VPS Deployment with Nginx Caching
+This repository contains the setup instructions and necessary files for deploying a WordPress website on a Virtual Private Server (VPS) using AWS EC2. The deployment process involves configuring Nginx as the web server, MySQL/MariaDB as the database, PHP for processing dynamic content, and enhancing website performance with Nginx caching. Additionally, the website is secured with Let's Encrypt SSL/TLS certificates.
 
 Table of Contents:-
 Server Provisioning
@@ -26,6 +26,14 @@ Install PHP and required modules: sudo apt-get install -y php-fpm php-mysql php-
 Configure Nginx:
 
 Adjust the try_files list in Nginx configuration.
+Enable caching:
+nginx
+Copy code
+proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=my_cache:10m max_size=1g inactive=60m use_temp_path=off;
+proxy_cache my_cache;
+proxy_cache_valid 200 30m;
+proxy_cache_valid 404 1m;
+add_header X-Proxy-Cache $upstream_cache_status;
 Set Up WordPress:
 
 Install WordPress on the server.
@@ -45,3 +53,11 @@ Obtain and install SSL certificate: sudo certbot --nginx -d linuxisfun.ddns.net
 Nginx Server Optimization
 Optimize Nginx Configuration:
 Enable gzip compression in Nginx for enhanced performance.
+GitHub Repository Setup
+Create GitHub Repository:
+
+GitHub Repository
+GitHub Actions Workflow:
+
+Set up a GitHub Actions workflow for automated deployment.
+Ensure the workflow includes necessary steps to install dependencies, build the project, and transfer files securely to the server.
