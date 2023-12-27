@@ -23,7 +23,7 @@ jobs:
           sudo cp -r . /var/www/html
           sudo chown -R www-data:www-data /var/www/html
           sudo systemctl restart nginx
-          sudo systemctl restart php7.4-fpm
+          sudo systemctl restart php8.1-fpm
 
       - name: Set Up MySQL Database
         run: |
