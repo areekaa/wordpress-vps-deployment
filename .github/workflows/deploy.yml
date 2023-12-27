@@ -27,9 +27,9 @@ jobs:
 
       - name: Set Up MySQL Database
         run: |
-          mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS wordpress;"
-          mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$wordpress'@'localhost' IDENTIFIED BY '$wordpress123';"
-          mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+          mysql -u wordpress -p$wordpress123 -e "CREATE DATABASE IF NOT EXISTS wordpress;"
+          mysql -u wordpress -p$wordpress123 -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$wordpress'@'localhost' IDENTIFIED BY '$wordpress123';"
+          mysql -u wordpress -p$wordpress123 -e "FLUSH PRIVILEGES;"
 
       - name: Install Let's Encrypt Certificate
         run: |
